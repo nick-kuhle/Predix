@@ -1,0 +1,4 @@
+// Free public market-context adapters. Providers may be delayed/rate-limited.
+const yahoo={SPY:'SPY',QQQ:'QQQ',DIA:'DIA',IWM:'IWM',GLD:'GLD',USO:'USO','DX-Y.NYB':'DX-Y.NYB','^VIX':'^VIX','^TNX':'^TNX'};
+export async function fetchYahooContext(symbols=Object.keys(yahoo)){const out={};await Promise.all(symbols.map(async key=>{const ticker=yahoo[key]||key;try{const r=await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=1y&interval=1d`);if(!r.ok)throw Error();const j=await r.json(),q=j.chart.result?.[0];out[key]=(q?.timestamp||[]).map((t,i)=>({time:t*1000,value:q.indicators.quote[0].close[i]})).filter(x=>x.value!=null)}catch{out[key]=[]}}));return out}
+export function contextReturns(series){return Object.fromEntries(Object.entries(series).map(([k,v])=>[k,v.length>1?Math.log(v.at(-1).value/v.at(-2).value):null]))}

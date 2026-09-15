@@ -153,3 +153,10 @@ Features shown in the dashboard are currently feature measurements and audit con
 - `src/providerStatus.js`: standardized provider authentication, billing, validation, rate-limit, outage and freshness states for the UI and forecast ledger.
 
 - `src/calibration.js`: walk-forward interval calibration helpers. Calibration must be learned only from completed historical forecasts, never from future outcomes during live inference.
+
+## Context and options foundations
+
+- `src/freeMarketContext.js`: free public Yahoo context adapters for SPY, QQQ, DIA, IWM, GLD, USO, DXY proxy, VIX and Treasury-yield proxy, plus cross-market returns.
+- `src/optionsSurface.js`: public Deribit BTC/ETH options-chain adapter and open-interest-weighted IV surface summary. Options features are unavailable for assets/providers without a valid public chain.
+
+These modules are foundations for the next forecast-orchestration step. They do not claim that context or IV is already consumed by TimesFM; that requires provider-supported covariate semantics and out-of-sample validation.
