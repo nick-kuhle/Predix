@@ -167,3 +167,7 @@ These modules are foundations for the next forecast-orchestration step. They do 
 - `GET /api/options?currency=BTC`: returns a public Deribit options-surface summary for BTC or ETH.
 
 These endpoints are intentionally separate from the TimesFM request until feature alignment and walk-forward validation are complete. This prevents unvalidated context from silently changing live predictions.
+
+## Forecast adjustment policy
+
+`src/adjustForecast.js` keeps the raw TimesFM path separate from a transparent volatility post-processing layer. Context and options values are not falsely described as TimesFM covariates. When provider covariate support is unavailable, the app may combine realized and implied volatility only after the raw forecast, with the method and inputs recorded for backtesting.
