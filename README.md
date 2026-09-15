@@ -147,3 +147,5 @@ Free public providers may be delayed, rate-limited, incomplete, or unofficial. T
 Features shown in the dashboard are currently feature measurements and audit context. They must not be described as TimesFM covariates unless the provider confirms that the selected model consumes them as covariates.
 
 - `src/greeks.js`: validated Black-Scholes European-option Greek calculations for future public options-chain adapters. Greeks are returned as unavailable when required inputs are missing; they are not inferred from spot prices alone.
+
+- `src/forecastFeatures.js`: assembles an auditable forecast feature payload from normalized bars, including realized/EWMA volatility, SMA20, volume z-score, VWAP, ATR, latest return and observation count.
