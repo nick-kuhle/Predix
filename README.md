@@ -151,3 +151,5 @@ Features shown in the dashboard are currently feature measurements and audit con
 - `src/forecastFeatures.js`: assembles an auditable forecast feature payload from normalized bars, including realized/EWMA volatility, SMA20, volume z-score, VWAP, ATR, latest return and observation count.
 
 - `src/providerStatus.js`: standardized provider authentication, billing, validation, rate-limit, outage and freshness states for the UI and forecast ledger.
+
+- `src/calibration.js`: walk-forward interval calibration helpers. Calibration must be learned only from completed historical forecasts, never from future outcomes during live inference.
