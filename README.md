@@ -119,3 +119,29 @@ The application uses `/api/market` for normalized market data and optional TSFM 
 ## Data-provider reality
 
 Free public providers may be delayed, rate-limited, incomplete, or unofficial. The dashboard should display source, timestamp, frequency and freshness for every forecast. Professional HFT claims require licensed exchange-grade tick and order-book data and are outside the free-first scope.
+
+## Implementation status (V2)
+
+### Completed foundations
+
+- `src/features.js`: returns, realized/EWMA volatility, VWAP, ATR, volume z-score
+- `src/marketSchema.js`: horizon/frequency definitions and validation helpers
+- `src/backtest.js`: rolling origins, forecast metrics, interval coverage
+- `src/forecastLedger.js`: forecast creation, settlement and summary metrics
+- API market-quality response: features, observation counts and freshness metadata
+- Asset/horizon-isolated market cache
+- TimesFM response validation and provider error propagation
+- Lightweight candlestick/volume chart with pan, zoom and crosshair support
+
+### Remaining integration work
+
+- Persist forecast ledger records in a database or durable KV store
+- Schedule settlement after each target timestamp
+- Connect backtest helpers to the UI
+- Add provider WebSocket ingestion and candle aggregation
+- Add real options-chain/Greeks adapters where public data exists
+- Add volatility and feature panels to the chart
+- Verify supported TSFM.ai covariate semantics before using features as model inputs
+- Add integration tests for every asset class and horizon
+
+Features shown in the dashboard are currently feature measurements and audit context. They must not be described as TimesFM covariates unless the provider confirms that the selected model consumes them as covariates.
