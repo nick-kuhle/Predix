@@ -171,3 +171,5 @@ These endpoints are intentionally separate from the TimesFM request until featur
 ## Forecast adjustment policy
 
 `src/adjustForecast.js` keeps the raw TimesFM path separate from a transparent volatility post-processing layer. Context and options values are not falsely described as TimesFM covariates. When provider covariate support is unavailable, the app may combine realized and implied volatility only after the raw forecast, with the method and inputs recorded for backtesting.
+
+- `GET /api/health`: lightweight deployment and capability health check.
