@@ -1,0 +1,8 @@
+# TimesFM inference service dependencies
+# Install with: python3 -m pip install -r requirements-timesfm.txt
+timesfm @ git+https://github.com/google-research/timesfm.git
+numpy>=1.26
+pandas>=2.1
+torch>=2.2
+fastapi>=0.110
+uvicorn>=0.29
