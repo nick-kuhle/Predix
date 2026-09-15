@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';
+const symbols={SPY:'SPY',QQQ:'QQQ',DIA:'DIA',IWM:'IWM',GLD:'GLD',USO:'USO','^VIX':'^VIX','^TNX':'^TNX'};
+export async function GET(){const out={};await Promise.all(Object.entries(symbols).map(async([name,ticker])=>{try{const r=await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=1y&interval=1d`,{cache:'no-store'});const j=await r.json(),q=j.chart.result?.[0];const v=(q?.indicators.quote[0].close||[]).filter(Number.isFinite);out[name]={value:v.at(-1)||null,return:v.length>1?Math.log(v.at(-1)/v.at(-2)):null}}catch{out[name]={value:null,return:null}}}));return NextResponse.json({source:'Yahoo public chart',updatedAt:Date.now(),context:out})}

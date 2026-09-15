@@ -160,3 +160,10 @@ Features shown in the dashboard are currently feature measurements and audit con
 - `src/optionsSurface.js`: public Deribit BTC/ETH options-chain adapter and open-interest-weighted IV surface summary. Options features are unavailable for assets/providers without a valid public chain.
 
 These modules are foundations for the next forecast-orchestration step. They do not claim that context or IV is already consumed by TimesFM; that requires provider-supported covariate semantics and out-of-sample validation.
+
+## API context endpoints
+
+- `GET /api/context`: returns public index/macro context with freshness metadata.
+- `GET /api/options?currency=BTC`: returns a public Deribit options-surface summary for BTC or ETH.
+
+These endpoints are intentionally separate from the TimesFM request until feature alignment and walk-forward validation are complete. This prevents unvalidated context from silently changing live predictions.
